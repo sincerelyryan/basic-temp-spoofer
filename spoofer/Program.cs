@@ -85,6 +85,7 @@ namespace spoofer
                 Console.WriteLine("Press Enter to start cleaning...");
                 Console.ReadKey();             
                 Process.Start(cleanerprocess);
+                Console.WriteLine("Press Any key to exit.");
                 Console.ReadKey();
             }
         }
