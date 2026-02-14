@@ -1,0 +1,7 @@
+C:\Users\noman\source\repos\spoofer\spoofer\bin\Debug\spoofer.exe.config
+C:\Users\noman\source\repos\spoofer\spoofer\bin\Debug\spoofer.exe
+C:\Users\noman\source\repos\spoofer\spoofer\bin\Debug\spoofer.pdb
+C:\Users\noman\source\repos\spoofer\spoofer\obj\Debug\spoofer.csproj.AssemblyReference.cache
+C:\Users\noman\source\repos\spoofer\spoofer\obj\Debug\spoofer.csproj.CoreCompileInputs.cache
+C:\Users\noman\source\repos\spoofer\spoofer\obj\Debug\spoofer.exe
+C:\Users\noman\source\repos\spoofer\spoofer\obj\Debug\spoofer.pdb
