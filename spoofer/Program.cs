@@ -78,13 +78,6 @@ namespace spoofer
                 Console.Write("Disabled \n");
                 Console.ResetColor();
             }
-            else
-            {
-                Console.Write("TPM Status: ");
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.Write("Unknown \n");
-                Console.ResetColor();
-            }
             // TPM STUFF ENDS HERE
 
             // SECURE BOOT STUFF
@@ -102,14 +95,6 @@ namespace spoofer
                 Console.Write("Disabled \n");
                 Console.ResetColor();
             }
-            else
-            {
-                Console.Write("Secure Boot Status: ");
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.Write("Unknown \n");
-                Console.ResetColor();
-            }
-
             // SECURE BOOT STUFF ENDS HERE
 
             // FAST BOOT STUFF
