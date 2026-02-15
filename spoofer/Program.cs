@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -14,11 +14,140 @@ namespace spoofer
     {
         static void Main(string[] args)
         {
+
+            ProcessStartInfo tpmstatus = new ProcessStartInfo
+            {
+                FileName = "powershell.exe",
+                Arguments = $"get-tpm",
+                UseShellExecute = false,
+                CreateNoWindow = true,
+                RedirectStandardOutput = true,
+            };
+            ProcessStartInfo securebootstatus = new ProcessStartInfo
+            {
+                FileName = "powershell.exe",
+                Arguments = $"Confirm-SecureBootUEFI",
+                UseShellExecute = false,
+                CreateNoWindow = true,
+                RedirectStandardOutput = true,
+            };
+            ProcessStartInfo fastbooststatus = new ProcessStartInfo
+            {
+                FileName = "powershell.exe",
+                Arguments = $"(GP \"HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power\").\"HiberbootEnabled\"   ",
+                UseShellExecute = false,
+                CreateNoWindow = true,
+                RedirectStandardOutput = true,
+            };
+            ProcessStartInfo virtstatus = new ProcessStartInfo
+            {
+                FileName = "powershell.exe",
+                Arguments = $"(GWMI Win32_Processor).VirtualizationFirmwareEnabled",
+                UseShellExecute = false,
+                CreateNoWindow = true,
+                RedirectStandardOutput = true,
+            };
+            StreamReader reader = Process.Start(tpmstatus).StandardOutput;
+            StreamReader fbreader = Process.Start(fastbooststatus).StandardOutput;
+            StreamReader sreader = Process.Start(securebootstatus).StandardOutput;
+            StreamReader vreader = Process.Start(virtstatus).StandardOutput;
+            string output = reader.ReadToEnd();
+            string outputs = sreader.ReadToEnd();
+            string outputfb = fbreader.ReadToEnd();
+            string outputv = vreader.ReadToEnd();
+            Process.Start(tpmstatus);
+            Process.Start(securebootstatus);
+            Process.Start(virtstatus);
             Console.Title = "Ryans Free Temp Spoofer";
             Console.ForegroundColor = ConsoleColor.Red;
             Console.Write("[+] ");
             Console.ResetColor();
             Console.Write("Ryan's Temp Spoofer! \n\n");
+            // TPM STUFF
+            if (output.Contains("TpmEnabled                : True"))
+            {
+                Console.Write("TPM Status: ");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write("Enabled \n");
+                Console.ResetColor();
+            }
+            else if (output.Contains("TpmEnabled                : False"))
+            {
+                Console.Write("TPM Status: ");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("Disabled \n");
+                Console.ResetColor();
+            }
+            else
+            {
+                Console.Write("TPM Status: ");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write("Unknown \n");
+                Console.ResetColor();
+            }
+            // TPM STUFF ENDS HERE
+
+            // SECURE BOOT STUFF
+            if (outputs.Contains("True"))
+            {
+                Console.Write("Secure Boot Status: ");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write("Enabled \n");
+                Console.ResetColor();
+            }
+            else if (outputs.Contains("False"))
+            {
+                Console.Write("Secure Boot Status: ");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("Disabled \n");
+                Console.ResetColor();
+            }
+            else
+            {
+                Console.Write("Secure Boot Status: ");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write("Unknown \n");
+                Console.ResetColor();
+            }
+
+            // SECURE BOOT STUFF ENDS HERE
+
+            // FAST BOOT STUFF
+            if (outputfb.Contains("1"))
+            {
+                Console.Write("Fast Boot Status: ");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write("Enabled \n");
+                Console.ResetColor();
+            }
+            else
+            {
+                Console.Write("Fast Boot Status: ");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("Disabled \n");
+                Console.ResetColor();
+            }
+
+            // fast boot stuff stop
+
+            if (outputv.Contains("True"))
+            {
+                Console.Write("Virtualization Status: ");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write("Enabled \n\n");
+                Console.ResetColor();
+            }
+            else
+            {
+                Console.Write("Virtualization Status: ");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("Disabled \n\n");
+                Console.ResetColor();
+            }
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write("[+] ");
+            Console.ResetColor();
+            Console.Write("All Of these requirements must be disabled to spoof correctly \n\n");                
             Console.WriteLine("[1] Spoof (Randomize)");
             Console.WriteLine("[2] Clean");
             string input = Console.ReadLine();
