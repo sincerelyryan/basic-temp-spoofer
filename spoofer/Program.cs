@@ -198,8 +198,10 @@ namespace spoofer
                 wc.DownloadFile("https://raw.githubusercontent.com/sincerelyryan/spoofstuff/refs/heads/main/clean.bat", cleanerpath);
                 Console.WriteLine("Press Enter to start cleaning...");
                 Console.ReadKey();             
-                Process.Start(cleanerprocess);
-                Console.WriteLine("Press Any key to exit.");
+                Process.Start(cleanerprocess).WaitForExit();
+                Console.Clear();
+                Console.WriteLine("Cleaning Has Completed!\n\n\n");
+                Console.WriteLine("Please restart your computer to complete process. Press Enter to exit.");
                 Console.ReadKey();
             }
         }
